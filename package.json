@@ -1,0 +1,18 @@
+{
+  "name": "react-validator-helper",
+  "version": "1.0.0",
+  "description": "Validate input value",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "validate",
+    "input"
+  ],
+  "author": "uit2712",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^17.0.2"
+  }
+}
