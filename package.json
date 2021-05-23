@@ -1,6 +1,6 @@
 {
-  "name": "react-validator-helper",
-  "version": "1.0.0",
+  "name": "@uit2712/react-validator-helper",
+  "version": "1.1.0",
   "description": "Validate input value",
   "main": "index.ts",
   "scripts": {
@@ -14,5 +14,14 @@
   "license": "ISC",
   "dependencies": {
     "react": "^17.0.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uit2712/ValidateHelper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/uit2712/ValidateHelper/issues"
+  },
+  "homepage": "https://github.com/uit2712/ValidateHelper#readme"
 }

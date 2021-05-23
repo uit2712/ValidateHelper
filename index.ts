@@ -20,18 +20,52 @@ type ValidatorType = {
     matchValue: string;
 }
 
-interface IRequestValidatorHelper {
+interface IRequestInputValidator {
     listValidators: ValidatorType[];
-    isValidateOnValueChange: boolean;
+    isValidateImmediate?: boolean;
 }
 
-export function useValidatorHelper(request: IRequestValidatorHelper) {
+interface IResponseInputValidatorProps {
+    errorMessage: string;
+    onChangeText: (value: string) => void;
+    value: string;
+}
+
+interface IResponseValidate {
+    ref: React.MutableRefObject<any>;
+    isValid: boolean;
+}
+
+interface IResponseInputValidator {
+    props: IResponseInputValidatorProps;
+    validate: () => IResponseValidate;
+    isValid: boolean;
+    ref: React.MutableRefObject<any>;
+}
+
+export function useInputValidator(request: IRequestInputValidator = {
+    listValidators: [],
+    isValidateImmediate: false,
+}): IResponseInputValidator {
+    const ref = React.useRef(null);
     const [value, setValue] = React.useState('');
+
+    const [isDirty, setIsDirty] = React.useState(false);
     React.useEffect(() => {
-        if (request.isValidateOnValueChange === true) {
-            setErrorMessage(validate());
+        if (isDirty === false && value !== '') {
+            setIsDirty(true);
         }
-    }, [value, request.listValidators]);
+    }, [value]);
+
+    React.useEffect(() => {
+        if (request.isValidateImmediate === true) {
+            setErrorMessage(validate());
+        } else {
+            if (isDirty === true) {
+                setErrorMessage(validate());
+            }
+        }
+    }, [isDirty, value, request.listValidators]);
     
     const [errorMessage, setErrorMessage] = React.useState('');
     function validate(): string {
@@ -67,8 +101,61 @@ export function useValidatorHelper(request: IRequestValidatorHelper) {
     }
 
     return {
-        errorMessage,
-        onChangeText: setValue,
-        value,
+        props: {
+            errorMessage,
+            onChangeText: setValue,
+            value,
+        },
+        validate: () => {
+            const errorMessage = validate();
+            setErrorMessage(errorMessage)
+            return {
+                ref,
+                isValid: errorMessage === '',
+            };
+        },
+        isValid: errorMessage === '' && value !== '',
+        ref,
+    }
+}
+
+interface IRequestFormValidator {
+    inputs: IResponseInputValidator[];
+    isFocusErrorInput?: boolean;
+}
+
+export function useFormValidator(request: IRequestFormValidator = {
+    inputs: [],
+    isFocusErrorInput: false,
+}) {
+    const [isValid, setIsValid] = React.useState(checkIfValid());
+    function checkIfValid() {
+        for (let i = 0; i < request.inputs.length; i++) {
+            if (request.inputs[i].isValid === false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    React.useEffect(() => {
+        setIsValid(checkIfValid());
+    }, [request.inputs]);
+
+    return {
+        validate: () => {
+            let refErrorInput: React.MutableRefObject<any> = null;
+            for (let i = 0; i < request.inputs.length; i++) {
+                const result = request.inputs[i].validate();
+                if (result.isValid === false) {
+                    if (request.isFocusErrorInput === true && !refErrorInput) {
+                        refErrorInput = result.ref;
+                    }
+                }
+            }
+
+            refErrorInput?.current?.focus();
+        },
+        isValid,
     }
 }
