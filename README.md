@@ -190,3 +190,63 @@ function App() {
     )
 }
 ```
+## Form validation
+```js
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ */
+
+import React from 'react';
+import {
+    StyleSheet,
+    KeyboardAvoidingView,
+    ScrollView,
+} from 'react-native';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Input, CheckBox, Button } from 'react-native-elements';
+import { useFormValidator, useInputValidator } from '@uit2712/react-validator-helper';
+
+function App() {
+    const name = useInputValidator({
+        ...
+    });
+    const email = useInputValidator({
+        ...
+    });
+    const [isShowPassword, setIsShowPassword] = React.useState(false);
+    const password = useInputValidator({
+        ...
+    });
+
+    const reenterPassword = useInputValidator({
+        ...
+    });
+
+    const form = useFormValidator({
+        inputs: [name, email, password, reenterPassword],
+        isFocusErrorInput: true, // focus on input when call form.validate
+    });
+
+    return (
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior='padding'
+            enabled={false}
+        >
+            <ScrollView>
+                ...
+                <Button
+                    title='Sign Up'
+                    onPress={form.validate}
+                />
+            </ScrollView>
+        </KeyboardAvoidingView>
+    );
+};
+
+export default App;
+```
