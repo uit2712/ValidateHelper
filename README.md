@@ -56,6 +56,7 @@ type ValidatorType = {
 ### Minlength
 ```js
 import { Input } from 'react-native-elements';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useInputValidator } from '@uit2712/react-validator-helper';
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
 ### Maxlength
 ```js
 import { Input } from 'react-native-elements';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useInputValidator } from '@uit2712/react-validator-helper';
 
 function App() {
@@ -112,6 +114,7 @@ function App() {
 ### Function
 ```js
 import { Input } from 'react-native-elements';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useInputValidator } from '@uit2712/react-validator-helper';
 
 function App() {
@@ -145,6 +148,7 @@ function App() {
 ### Match
 ```js
 import { Input } from 'react-native-elements';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useInputValidator } from '@uit2712/react-validator-helper';
 
 function App() {
