@@ -1,6 +1,6 @@
 {
   "name": "@uit2712/react-validator-helper",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Validate input value",
   "main": "index.ts",
   "scripts": {
