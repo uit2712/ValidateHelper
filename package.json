@@ -8,8 +8,9 @@
     "publish": "npm publish --access=public"
   },
   "keywords": [
-    "validate",
-    "input"
+    "react validate input",
+    "react validator",
+    "react native validator"
   ],
   "author": "uit2712",
   "license": "ISC",
