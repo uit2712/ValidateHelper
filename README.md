@@ -6,7 +6,7 @@ npm install --save @uit2712/react-validator-helper
 # Interfaces, types
 ## Validation types
 ### Minlength
-Show error message if the length of input is not reach __minlength__
+Show error message if the length of input is not reach __minlength__.
 ```js
 type ValidatorType = {
     type: 'minlength';
@@ -20,7 +20,7 @@ type ValidatorType = {
 - __errorMessagePlaceHolder__: A placeholder for __minlength__ in __errorMessage__
 - __minlength__: Minimum length
 ### Maxlength
-Show error message if the length of input reachs __maxlength__
+Show error message if the length of input reachs __maxlength__.
 ```js
 type ValidatorType = {
     type: 'maxlength';
@@ -34,7 +34,7 @@ type ValidatorType = {
 - __errorMessagePlaceHolder__: A placeholder for __maxlength__ in __errorMessage__
 - __maxlength__: Maximum length
 ### Function
-Validate input uses a function __validate__ like we can use this to validate email or phone with regex
+Validate input uses a function __validate__ like we can use this to validate email or phone with regex.
 ```js
 type ValidatorType = {
     type: 'function';
@@ -42,10 +42,17 @@ type ValidatorType = {
     validate: (value: string) => boolean;
 }
 ```
+### Match
+Check if current input's value is same another input's value or not like we cab use this to compare password and re-enter password.
+```js
+type ValidatorType = {
+    type: 'match';
+    errorMessage: string;
+    matchValue: string;
+}
+```
 # Usage
-
 ## Input validation
-### useInputValidator
 ### Minlength
 ```js
 import { Input } from 'react-native-elements';
@@ -98,6 +105,83 @@ function App() {
                 errorStyle={{ color: 'red' }}
                 {...name.props}
             />
+        </View>
+    )
+}
+```
+### Function
+```js
+import { Input } from 'react-native-elements';
+import { useInputValidator } from '@uit2712/react-validator-helper';
+
+function App() {
+    const email = useInputValidator({
+        listValidators: [{
+            type: 'function',
+            errorMessage: 'Please enter a valid email adress.',
+            validate: (value) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/.test(value) === true,
+        }]
+    });
+    
+    return (
+        <View>
+            <Input
+                ref={email.ref}
+                placeholder='email@address.com'
+                label='Your Email Address'
+                leftIcon={
+                    <MaterialCommunityIcon
+                        name='email'
+                        size={30}
+                    />
+                }
+                errorStyle={{ color: 'red' }}
+                {...email.props}
+            />
+        </View>
+    )
+}
+```
+### Match
+```js
+import { Input } from 'react-native-elements';
+import { useInputValidator } from '@uit2712/react-validator-helper';
+
+function App() {
+    const password = useInputValidator({
+        listValidators: [{
+            type: 'function',
+            errorMessage: 'Please enter a password has at least one character and one number.',
+            validate: (value) => /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(value) === true,
+        }]
+    });
+
+    const reenterPassword = useInputValidator({
+        listValidators: [{
+            type: 'match',
+            errorMessage: 'Re-enter password is not match.',
+            matchValue: password.props.value,
+        }]
+    });
+    
+    return (
+        <View>
+            ...
+            <Input
+                ref={reenterPassword.ref}
+                placeholder='Confirm Password'
+                label='Re-enter password'
+                leftIcon={
+                    <MaterialCommunityIcon
+                        name='account-edit'
+                        size={30}
+                    />
+                }
+                secureTextEntry={isShowPassword === false}
+                errorStyle={{ color: 'red' }}
+                {...reenterPassword.props}
+            />
+            ...
         </View>
     )
 }
