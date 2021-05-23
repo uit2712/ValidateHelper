@@ -1,4 +1,19 @@
 # A library support for input or form validation
+# Table of contents
+- [Installation](#installation)
+- [Interfaces, types](#interfaces-types)
+  * [Validation types](#validation-types)
+    + [Minlength](#minlength)
+    + [Maxlength](#maxlength)
+    + [Function](#function)
+    + [Match](#match)
+- [Usage](#usage)
+  * [Input validation](#input-validation)
+    + [Minlength](#minlength-1)
+    + [Maxlength](#maxlength-1)
+    + [Function](#function-1)
+    + [Match](#match-1)
+  * [Form validation](#form-validation)
 # Installation
 ```
 npm install --save @uit2712/react-validator-helper
