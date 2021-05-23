@@ -18,6 +18,9 @@ type ValidatorType = {
     type: 'match';
     errorMessage: string;
     matchValue: string;
+} | {
+    type: 'required';
+    errorMessage: string;
 }
 
 interface IRequestInputValidator {
@@ -93,6 +96,11 @@ export function useInputValidator(request: IRequestInputValidator = {
                 case 'match':
                     if (validator.matchValue !== value) {
                         return validator.errorMessage ?? 'Re-enter password is not match.';
+                    }
+                    break;
+                case 'required':
+                    if (!value) {
+                        return validator.errorMessage ?? 'Please fill the input.';
                     }
                     break;
             }
