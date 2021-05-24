@@ -1,5 +1,6 @@
 # A library support for input or form validation
 # Table of contents
+- [Demo](#demo)
 - [Installation](#installation)
 - [Interfaces, types](#interfaces-types)
   * [Validation types](#validation-types)
@@ -14,6 +15,9 @@
     + [Function](#function-1)
     + [Match](#match-1)
   * [Form validation](#form-validation)
+# Demo
+- Link youtube:
+- Link github: https://github.com/uit2712/RNElementInputValidator
 # Installation
 ```
 npm install --save @uit2712/react-validator-helper
@@ -30,10 +34,11 @@ type ValidatorType = {
     minlength: number;
 }
 ```
-- __type__: 'minlength'
-- __errorMessage__: Error message
-- __errorMessagePlaceHolder__: A placeholder for __minlength__ in __errorMessage__
-- __minlength__: Minimum length
+|__Attribute name__|Type|Description|Default value|
+|---|---|---|---|
+|__errorMessage__|string|Error message||
+|__errorMessagePlaceHolder__|string|A placeholder for __minlength__ in __errorMessage__||
+|__minlength__|number|Minimum length (__minlength__ >= 1)|1|
 ### Maxlength
 Show error message if the length of input reachs __maxlength__.
 ```js
@@ -44,10 +49,11 @@ type ValidatorType = {
     maxlength: number;
 }
 ```
-- __type__: 'maxlength'
-- __errorMessage__: Error message
-- __errorMessagePlaceHolder__: A placeholder for __maxlength__ in __errorMessage__
-- __maxlength__: Maximum length
+|__Attribute name__|Type|Description|Default value|
+|---|---|---|---|
+|__errorMessage__|string|Error message||
+|__errorMessagePlaceHolder__|string|A placeholder for __maxlength__ in __errorMessage__||
+|__minlength__|number|Maximum length (__maxlength__ >= 1)|1|
 ### Function
 Validate input uses a function __validate__ like we can use this to validate email or phone with regex.
 ```js
@@ -57,6 +63,10 @@ type ValidatorType = {
     validate: (value: string) => boolean;
 }
 ```
+|__Attribute name__|Type|Description|Default value|
+|---|---|---|---|
+|__errorMessage__|string|Error message||
+|__validate__|function|A function will validate input value||
 ### Match
 Check if current input's value is same another input's value or not like we cab use this to compare password and re-enter password.
 ```js
@@ -66,6 +76,10 @@ type ValidatorType = {
     matchValue: string;
 }
 ```
+|__Attribute name__|Type|Description|Default value|
+|---|---|---|---|
+|__errorMessage__|string|Error message||
+|__matchValue__|string|Compare input value is equals to __matchValue__ or not|''|
 # Usage
 ## Input validation
 ### Minlength
@@ -97,6 +111,7 @@ function App() {
     )
 }
 ```
+
 ### Maxlength
 ```js
 import { Input } from 'react-native-elements';
