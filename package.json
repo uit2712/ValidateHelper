@@ -14,10 +14,6 @@
   ],
   "author": "uit2712",
   "license": "ISC",
-  "dependencies": {
-    "react": "^17.0.2"
-  },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/uit2712/ValidateHelper.git"
