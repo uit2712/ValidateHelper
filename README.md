@@ -68,7 +68,7 @@ type ValidatorType = {
 |__errorMessage__|string|Error message||
 |__validate__|function|A function will validate input value||
 ### Match
-Check if current input's value is same another input's value or not like we cab use this to compare password and re-enter password.
+Check if current input's value is same another input's value or not like we can use this to compare password and re-enter password.
 ```js
 type ValidatorType = {
     type: 'match';
